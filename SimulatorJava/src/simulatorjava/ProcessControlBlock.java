@@ -16,26 +16,31 @@ public class ProcessControlBlock {
     private int parrival;
     private int pbursttime;
     private int piotime;
-    private int context_switch;
+    //private int context_switch;
     private int turnaroundtime;
     private int throughputtime;
     private int waittime;
     
     
+    //, int con_switch 
+    //Took this out for testing
     
-    
-    ProcessControlBlock(int id, int pnum, int arrivaltime, int burst, int iotime, int con_switch){
+    ProcessControlBlock(int id, int pnum, int arrivaltime, int burst, int iotime){
         pid = id;
         prioritynum = pnum;
         parrival = arrivaltime;
         pbursttime = burst; 
         piotime = iotime;
-        context_switch = con_switch;
+        //context_switch = con_switch;
         
         turnaroundtime = 0;
         throughputtime = 0;
         waittime = 0;
         
+    }
+    
+    public int getpid(){
+        return pid;
     }
     
 

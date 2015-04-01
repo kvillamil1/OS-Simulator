@@ -17,9 +17,12 @@ public class SimulatorJava {
      */
     public static void main(String[] args) {
         //Test for read in file
-        //System.out.println(readFile.load());
-      
+       //System.out.println(readFile.load());        
     
+       readFile.setPCB();
+        
+        
+        
     }
     
 }
