@@ -4,18 +4,22 @@
  * and open the template in the editor.
  */
 package simulatorjava;
-
+import java.util.*;
 /**
  *
  * @author stephenthoen
  */
 public class SimulatorJava {
 
+     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //Test for read in file
+        //System.out.println(readFile.load());
+      
+    
     }
     
 }

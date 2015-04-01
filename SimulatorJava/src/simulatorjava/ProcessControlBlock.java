@@ -21,6 +21,9 @@ public class ProcessControlBlock {
     private int throughputtime;
     private int waittime;
     
+    
+    
+    
     ProcessControlBlock(int id, int pnum, int arrivaltime, int burst, int iotime, int con_switch){
         pid = id;
         prioritynum = pnum;
@@ -33,7 +36,7 @@ public class ProcessControlBlock {
         throughputtime = 0;
         waittime = 0;
         
-        
     }
+    
 
 }
