@@ -43,5 +43,22 @@ public class ProcessControlBlock {
         return pid;
     }
     
+    public int getprioritynum()
+    {
+        return prioritynum;
+    }
+    
+    public int getparrival()
+    {
+        return parrival;
+    }
+    public int getbursttime()
+    {
+        return pbursttime;
+    }
+    public int getiotime()
+    {
+        return piotime;
+    }
 
 }

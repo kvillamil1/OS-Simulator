@@ -36,13 +36,10 @@ public class readFile {
             System.out.println("Did not read in File");
         }
 
-        Iterator i = loadEvent.iterator();
-        while (i.hasNext()) {
-
-            //Vector<String> temp = new Vector<String>();
-            System.out.println(i.next());
-
-        }
+//        Iterator i = loadEvent.iterator();
+//        while (i.hasNext()) {
+//            System.out.println(i.next());
+//        }
 
         return loadEvent;
     }
@@ -63,16 +60,23 @@ public class readFile {
             tparrival = Integer.parseInt(newvect.get(i).get(2));
             tpbursttime = Integer.parseInt(newvect.get(i).get(3));
             tpriotime = Integer.parseInt(newvect.get(i).get(4));
+        
+        
+        ProcessControlBlock temp = 
+                new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime);        
+        
+        
+         //System.out.println(temp.getiotime());
         }
 
         //I was able to pass values using this no problem.  
         //Will need to determine where each process control block is stored
         //Could be stored in a vector of objects and then referenced.
-        ProcessControlBlock temp = new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime);
+
         
         
         //Testing Features
-        //System.out.println(temp.getpid());
+       
 
     }
 
