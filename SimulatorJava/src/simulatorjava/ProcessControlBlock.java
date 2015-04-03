@@ -39,6 +39,11 @@ public class ProcessControlBlock {
         
     }
     
+    public void setburst(int burstr)
+    {
+        pbursttime = burstr;
+    }
+    
     public int getpid(){
         return pid;
     }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package simulatorjava;
+
 import java.util.Collection;
 import java.util.PriorityQueue;
 import java.util.*;
@@ -19,34 +20,45 @@ public class ProcessSchedules {
 //    int waitingTime;
 //    double avgWaitingTime;
 //    double avgTurnAroundTime;
-    
-    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime){
-        while(!myQueue.isEmpty()){
+    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime) {
+        while (!myQueue.isEmpty()) {
             //myQueue.get(Object.get(pbursttime));
             ProcessControlBlock temp = myQueue.poll();
             int burst = temp.getbursttime();
-            while(burst != 0)
-            {
+            while (burst != 0) {
                 burst--;
-                clockTime++;   
+                clockTime++;
             }
             myQueue.remove(0);
-            }
+        }
         return clockTime;
     }
-    
-    
-    public static void rr1(List<Object> myQueue, int clockTime){
-    
-    }
-    public static void rr10(List<Object> myQueue, int clockTime){
-        
-    }
-    public static void shortestnext(List<Object> myQueue, int clockTime){
-        
-    }
-    
-   
-    
-}
 
+    public static int rr1(Queue<ProcessControlBlock> myQueue, int rrclockTime) {
+        while (!myQueue.isEmpty()) {
+            ProcessControlBlock temp = myQueue.poll();
+            int burst = temp.getbursttime();
+            for (int i = 0; i < 1; i++) {
+                burst--;
+                rrclockTime++;
+            }
+
+            if (burst == 0) {
+                myQueue.remove(0);
+            } else {
+                temp.setburst(burst);
+                myQueue.add(temp);
+            }
+        }
+        return rrclockTime;
+    }
+
+    public static void rr10(Queue<ProcessControlBlock> myQueue, int clockTime) {
+
+    }
+
+    public static void shortestnext(Queue<ProcessControlBlock> myQueue, int clockTime) {
+
+    }
+
+}
