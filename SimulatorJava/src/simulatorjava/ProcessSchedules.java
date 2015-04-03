@@ -20,25 +20,17 @@ public class ProcessSchedules {
 //    int waitingTime;
 //    double avgWaitingTime;
 //    double avgTurnAroundTime;
-<<<<<<< Updated upstream
     
     //First Come First Serve Function that returns clock time
     public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime) {
         //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
              //grab first process object off of the queue
-=======
-    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime) {
-        while (!myQueue.isEmpty()) {
-            //myQueue.get(Object.get(pbursttime));
->>>>>>> Stashed changes
             ProcessControlBlock temp = myQueue.poll();
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
-<<<<<<< Updated upstream
+
             //while the process burst time is not 0, decrement the burst time by one and increase clock time by one
-=======
->>>>>>> Stashed changes
             while (burst != 0) {
                 burst--;
                 clockTime++;
@@ -49,7 +41,6 @@ public class ProcessSchedules {
         return clockTime;
     }
 
-<<<<<<< Updated upstream
      //Round Robin Function with time quantum of 1 that returns clock time
     public static int rr1(Queue<ProcessControlBlock> myQueue, int rrclockTime) {
         //while the queue still contains process objects, run round robin schedule algorithm
@@ -108,18 +99,7 @@ public class ProcessSchedules {
         return rr10clockTime;
     }
 
-    public static void shortestnext(Queue<ProcessControlBlock> myQueue, int clockTime) {
-
-=======
-    public static void rr1(List<Object> myQueue, int clockTime) {
-
-    }
-
-    public static void rr10(List<Object> myQueue, int clockTime) {
-
-    }
-
-    public static int shortestnext(Queue<ProcessControlBlock> myQueue, int clockTime) {
+    public static int shortestnext(Queue<ProcessControlBlock> myQueue, int spnclockTime) {
         ArrayList <ProcessControlBlock> spn = new ArrayList <ProcessControlBlock>();
         int counter = myQueue.size();
 
@@ -152,14 +132,13 @@ public class ProcessSchedules {
             //remove process when finished)
             while (burst != 0) {
                 burst--;
-                clockTime++;
+                spnclockTime++;
             }
             spn.remove(tempshortest);
         }
 
 
-        return clockTime;
->>>>>>> Stashed changes
+        return spnclockTime;
     }
 
 }
