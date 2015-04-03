@@ -31,6 +31,7 @@ public class SimulatorJava {
         int rr10clockTime = 0;
         
        readFile.setPCB();
+<<<<<<< Updated upstream
        fcfsclockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, fcfsclockTime);
         readFile.setPCB();
        rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
@@ -40,6 +41,14 @@ public class SimulatorJava {
        System.out.println("First Come First Serve = " + fcfsclockTime);
        System.out.println("RR1 = " + rr1clockTime); 
        System.out.println("RR10 = " + rr10clockTime);
+=======
+       clockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, clockTime);
+       clockTime = ProcessSchedules.shortestnext(readFile.theTable, clockTime);
+      
+       System.out.println("First Come First Serve = " + clockTime);
+       System.out.println("Shortest Process Next = " + clockTime);
+        
+>>>>>>> Stashed changes
         
     }
     
