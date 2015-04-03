@@ -18,9 +18,9 @@ public class SimulatorJava {
     public static void main(String[] args) {
         //Test for read in file
        //System.out.println(readFile.load());        
-    
+        int clockTime = 0;
        readFile.setPCB();
-        
+       
         
         
     }
