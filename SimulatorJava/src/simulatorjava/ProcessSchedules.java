@@ -36,11 +36,6 @@ public class ProcessSchedules {
     }
     
     
-    
-    public static void fifo(){
-
-
-    }
     public static void rr1(List<Object> myQueue, int clockTime){
     
     }

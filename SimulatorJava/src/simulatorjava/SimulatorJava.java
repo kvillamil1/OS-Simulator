@@ -24,7 +24,7 @@ public class SimulatorJava {
        readFile.setPCB();
        clockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, clockTime);
       
-       System.out.println("First Come First Serve = "+ clockTime);
+       System.out.println("First Come First Serve = " + clockTime);
         
         
     }
