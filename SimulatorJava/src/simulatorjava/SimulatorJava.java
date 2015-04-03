@@ -4,7 +4,15 @@
  * and open the template in the editor.
  */
 package simulatorjava;
+
 import java.util.*;
+import java.util.Locale;
+
+
+import java.io.File;
+import java.io.IOException;
+
+
 /**
  *
  * @author stephenthoen
@@ -18,15 +26,20 @@ public class SimulatorJava {
     public static void main(String[] args) {
         //Test for read in file
        //System.out.println(readFile.load());        
-        int clockTime = 0;
-        int rrclockTime = 0;
+        int fcfsclockTime = 0;
+        int rr1clockTime = 0;
+        int rr10clockTime = 0;
         
        readFile.setPCB();
-       clockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, clockTime);
-       rrclockTime = ProcessSchedules.rr1(readFile.theTable, rrclockTime);
+       fcfsclockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, fcfsclockTime);
+        readFile.setPCB();
+       rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
+        readFile.setPCB();
+       rr10clockTime = ProcessSchedules.rr10(readFile.theTable, rr10clockTime);
        
-       System.out.println("First Come First Serve = " + clockTime);
-       System.out.println("RR = " + rrclockTime); 
+       System.out.println("First Come First Serve = " + fcfsclockTime);
+       System.out.println("RR1 = " + rr1clockTime); 
+       System.out.println("RR10 = " + rr10clockTime);
         
     }
     
