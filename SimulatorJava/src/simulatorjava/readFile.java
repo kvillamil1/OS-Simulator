@@ -14,6 +14,8 @@ import java.io.*;
  */
 public class readFile {
 
+    public static Queue<ProcessControlBlock> theTable = new LinkedList<ProcessControlBlock>();
+    
     public static Vector<Vector<String>> load() {
         Vector<Vector<String>> loadEvent = new Vector<Vector<String>>();
         File nf = new File("PCB_Values.txt");
@@ -36,15 +38,11 @@ public class readFile {
             System.out.println("Did not read in File");
         }
 
-//        Iterator i = loadEvent.iterator();
-//        while (i.hasNext()) {
-//            System.out.println(i.next());
-//        }
-
         return loadEvent;
     }
 
-    public static void setPCB() {
+    public static Object setPCB() {
+        
         Vector<Vector<String>> newvect = load();
 
         int tPid = 0;
@@ -53,6 +51,7 @@ public class readFile {
         int tpbursttime = 0;
         int tpriotime = 0;
 
+        ProcessSchedules ps = new ProcessSchedules();
         //Hard coded values for now they have the ablility to change
         for (int i = 0; i < 5; i++) {
             tPid = Integer.parseInt(newvect.get(i).get(0));
@@ -60,24 +59,14 @@ public class readFile {
             tparrival = Integer.parseInt(newvect.get(i).get(2));
             tpbursttime = Integer.parseInt(newvect.get(i).get(3));
             tpriotime = Integer.parseInt(newvect.get(i).get(4));
-        
-        
-        ProcessControlBlock temp = 
-                new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime);        
-        
-        
-         //System.out.println(temp.getiotime());
+
+            ProcessControlBlock temp
+                    = new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime);
+
+            theTable.add(temp);
+            
         }
-
-        //I was able to pass values using this no problem.  
-        //Will need to determine where each process control block is stored
-        //Could be stored in a vector of objects and then referenced.
-
-        
-        
-        //Testing Features
-       
-
+        return theTable;
     }
 
 }

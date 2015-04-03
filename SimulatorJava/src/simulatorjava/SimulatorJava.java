@@ -19,8 +19,12 @@ public class SimulatorJava {
         //Test for read in file
        //System.out.println(readFile.load());        
         int clockTime = 0;
+        
+        
        readFile.setPCB();
-       
+       clockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, clockTime);
+      
+       System.out.println("First Come First Serve = "+ clockTime);
         
         
     }

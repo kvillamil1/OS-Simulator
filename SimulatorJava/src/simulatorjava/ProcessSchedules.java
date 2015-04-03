@@ -13,13 +13,14 @@ import java.util.*;
  * @author JPerry1120
  */
 public class ProcessSchedules {
-    int temp;
-    int proceessArrivalTime;
-    int waitingTime;
-    double avgWaitingTime;
-    double avgTurnAroundTime;
+
+//    int temp;
+//    int proceessArrivalTime;
+//    int waitingTime;
+//    double avgWaitingTime;
+//    double avgTurnAroundTime;
     
-    public static void firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime){
+    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime){
         while(!myQueue.isEmpty()){
             //myQueue.get(Object.get(pbursttime));
             ProcessControlBlock temp = myQueue.poll();
@@ -31,6 +32,14 @@ public class ProcessSchedules {
             }
             myQueue.remove(0);
             }
+        return clockTime;
+    }
+    
+    
+    
+    public static void fifo(){
+
+
     }
     public static void rr1(List<Object> myQueue, int clockTime){
     
