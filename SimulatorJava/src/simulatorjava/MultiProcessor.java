@@ -48,17 +48,21 @@ public class MultiProcessor {
 
         //prompt user which scheudling algorithm to do
         int choose;
-        do {
+        //do {
             choose = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. FCFS\n2. RR1\n3. RR10\n4. SPN\n5. Exit"));
 
             //call scheduling algorithms...runs processes in cpuqueue1 first then cpuqueue2...etc
             switch (choose) {
-                case 1:
+                case 1: 
                     int fcfsclockTime = 0;
-                    ProcessSchedules.firstcomefirstserve(cpuqueue1, fcfsclockTime);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue2, fcfsclockTime);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue3, fcfsclockTime);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue4, fcfsclockTime);
+                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue1, fcfsclockTime);
+                    System.out.println(fcfsclockTime);
+                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue2, fcfsclockTime);
+                    System.out.println(fcfsclockTime);
+                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue3, fcfsclockTime);
+                    System.out.println(fcfsclockTime);
+                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue4, fcfsclockTime);
+                    System.out.println(fcfsclockTime);
                 case 2:
                     int rr1clockTime = 0;
                     ProcessSchedules.rr1(cpuqueue1, rr1clockTime);
@@ -81,7 +85,7 @@ public class MultiProcessor {
 //                case 5:
 //                    return;
             }
-        } while (choose < 5);
+       // } while (choose < 5);
         return;
     }
 }
