@@ -51,7 +51,7 @@ public class MultiProcessor {
         do {
             choose = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. FCFS\n2. RR1\n3. RR10\n4. SPN\n5. Exit"));
 
-            //call scheduling algorithms
+            //call scheduling algorithms...runs processes in cpuqueue1 first then cpuqueue2...etc
             switch (choose) {
                 case 1:
                     int fcfsclockTime = 0;
@@ -79,7 +79,7 @@ public class MultiProcessor {
                     ProcessSchedules.shortestnext(cpuqueue4, SPNclockTime);
 
                 case 5:
-                    break;
+                    return;
             }
         } while (choose <= 5);
 
