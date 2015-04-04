@@ -38,13 +38,11 @@ public class SimulatorJava {
         readFile.setPCB();
        rr10clockTime = ProcessSchedules.rr10(readFile.theTable, rr10clockTime);
         readFile.setPCB();
-        
        spnclockTime = ProcessSchedules.shortestnext(readFile.theTable, spnclockTime);
        
        System.out.println("First Come First Serve = " + fcfsclockTime);
        System.out.println("RR1 = " + rr1clockTime); 
        System.out.println("RR10 = " + rr10clockTime);
-       
        System.out.println("Shortest Process Next = " + spnclockTime);
 
         

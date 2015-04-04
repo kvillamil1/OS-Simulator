@@ -22,23 +22,32 @@ public class ProcessSchedules {
 //    double avgTurnAroundTime;
     
     //First Come First Serve Function that returns clock time
-    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int clockTime) {
+    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int fcfsclockTime) {
         //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
              //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
+            
+            //get the io time for each process
+            int io = temp.getiotime();
+            int ioclockTime = 0;
+            
+            //if io time > 0, send to IOProcessing
+            if(io>0)
+                ioclockTime = IOProcessing.processIO(temp,ioclockTime);
+            
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
 
             //while the process burst time is not 0, decrement the burst time by one and increase clock time by one
             while (burst != 0) {
                 burst--;
-                clockTime++;
+                fcfsclockTime++;
             }
             //When the process is done running (burst time = 0), remove it from the queue
             myQueue.remove(0);
         }
-        return clockTime;
+        return fcfsclockTime;
     }
 
      //Round Robin Function with time quantum of 1 that returns clock time
@@ -47,6 +56,15 @@ public class ProcessSchedules {
         while (!myQueue.isEmpty()) {
              //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
+            
+             //get the io time for each process
+            int io = temp.getiotime();
+            int ioclockTime = 0;
+            
+            //if io time > 0, send to IOProcessing
+            if(io>0)
+                ioclockTime = IOProcessing.processIO(temp,ioclockTime);
+            
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
             for (int i = 0; i < 1; i++) {
@@ -72,6 +90,15 @@ public class ProcessSchedules {
         {
             //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
+            
+             //get the io time for each process
+            int io = temp.getiotime();
+            int ioclockTime = 0;
+            
+            //if io time > 0, send to IOProcessing
+            if(io>0)
+                ioclockTime = IOProcessing.processIO(temp,ioclockTime);
+            
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
             //run the process for 10 "clock time seconds" for round robin 10
@@ -124,6 +151,14 @@ public class ProcessSchedules {
                     
                 }
             }
+            
+             //get the io time for each process
+            int io = tempshortest.getiotime();
+            int ioclockTime = 0;
+            
+            //if io time > 0, send to IOProcessing
+            if(io>0)
+                ioclockTime = IOProcessing.processIO(tempshortest,ioclockTime);
             
             //set shortest burst time to burst
             int burst = tempshortest.getbursttime();
