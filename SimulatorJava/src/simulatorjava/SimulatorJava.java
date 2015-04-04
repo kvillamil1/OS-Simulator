@@ -21,10 +21,6 @@ public class SimulatorJava {
     public static void main(String[] args) {
         //Test for read in file
         //System.out.println(readFile.load());        
-        int fcfsclockTime = 0;
-        int rr1clockTime = 0;
-        int rr10clockTime = 0;
-        int spnclockTime = 0;
 
         //User Input Options
         int select;
@@ -33,6 +29,10 @@ public class SimulatorJava {
 
             switch (select) {
                 case 1:
+                    int fcfsclockTime = 0;
+                    int rr1clockTime = 0;
+                    int rr10clockTime = 0;
+                    int spnclockTime = 0;
 
                     System.out.println("Uniprocessor");
                     System.out.println("-------------------");
@@ -49,6 +49,7 @@ public class SimulatorJava {
                     System.out.println("RR1 = " + rr1clockTime);
                     System.out.println("RR10 = " + rr10clockTime);
                     System.out.println("Shortest Process Next = " + spnclockTime);
+                    System.out.printf("\n");
                     break;
 
                 case 2:
@@ -58,6 +59,6 @@ public class SimulatorJava {
                 case 3:
                     break;
             }
-        } while (select <= 3);
+        } while (select <= 2);
     }
 }
