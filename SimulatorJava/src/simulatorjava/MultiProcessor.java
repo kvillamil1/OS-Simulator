@@ -78,10 +78,10 @@ public class MultiProcessor {
                     ProcessSchedules.shortestnext(cpuqueue3, SPNclockTime);
                     ProcessSchedules.shortestnext(cpuqueue4, SPNclockTime);
 
-                case 5:
-                    return;
+//                case 5:
+//                    return;
             }
-        } while (choose <= 5);
-
+        } while (choose < 5);
+        return;
     }
 }
