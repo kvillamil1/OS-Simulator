@@ -6,12 +6,8 @@
 package simulatorjava;
 
 import java.util.*;
-import java.util.Locale;
-
-
-import java.io.File;
-import java.io.IOException;
-
+import java.io.*;
+import javax.swing.*;
 
 /**
  *
@@ -19,33 +15,49 @@ import java.io.IOException;
  */
 public class SimulatorJava {
 
-     
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         //Test for read in file
-       //System.out.println(readFile.load());        
+        //System.out.println(readFile.load());        
         int fcfsclockTime = 0;
         int rr1clockTime = 0;
         int rr10clockTime = 0;
         int spnclockTime = 0;
-        
-       readFile.setPCB();
-       fcfsclockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, fcfsclockTime);
-        readFile.setPCB();
-       rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
-        readFile.setPCB();
-       rr10clockTime = ProcessSchedules.rr10(readFile.theTable, rr10clockTime);
-        readFile.setPCB();
-       spnclockTime = ProcessSchedules.shortestnext(readFile.theTable, spnclockTime);
-       
-       System.out.println("First Come First Serve = " + fcfsclockTime);
-       System.out.println("RR1 = " + rr1clockTime); 
-       System.out.println("RR10 = " + rr10clockTime);
-       System.out.println("Shortest Process Next = " + spnclockTime);
 
-        
+        //User Input Options
+        int select;
+        do {
+            select = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. Uniprocessor\n2. Multiprocessor\n3. Exit"));
+
+            switch (select) {
+                case 1:
+
+                    System.out.println("Uniprocessor");
+                    System.out.println("-------------------");
+                    readFile.setPCB();
+                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, fcfsclockTime);
+                    readFile.setPCB();
+                    rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
+                    readFile.setPCB();
+                    rr10clockTime = ProcessSchedules.rr10(readFile.theTable, rr10clockTime);
+                    readFile.setPCB();
+                    spnclockTime = ProcessSchedules.shortestnext(readFile.theTable, spnclockTime);
+
+                    System.out.println("First Come First Serve = " + fcfsclockTime);
+                    System.out.println("RR1 = " + rr1clockTime);
+                    System.out.println("RR10 = " + rr10clockTime);
+                    System.out.println("Shortest Process Next = " + spnclockTime);
+                    break;
+
+                case 2:
+                    System.out.println("Multiprocessor");
+                    System.out.println("-------------------");
+                    break;
+                case 3:
+                    break;
+            }
+        } while (select <= 3);
     }
-    
 }
