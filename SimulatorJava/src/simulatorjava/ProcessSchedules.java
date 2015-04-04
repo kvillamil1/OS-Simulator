@@ -28,6 +28,7 @@ public class ProcessSchedules {
              //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
             
+            
             //get the io time for each process
             int io = temp.getiotime();
             int ioclockTime = 0;

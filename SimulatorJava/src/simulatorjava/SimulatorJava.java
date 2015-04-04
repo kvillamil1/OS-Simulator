@@ -6,8 +6,14 @@
 package simulatorjava;
 
 import java.util.*;
+
 import java.io.*;
 import javax.swing.*;
+
+import java.util.Locale;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  *
@@ -55,6 +61,13 @@ public class SimulatorJava {
                 case 2:
                     System.out.println("Multiprocessor");
                     System.out.println("-------------------");
+
+                    //read text file and create Process Objects containing attributes from file
+                    readFile.setPCB();
+
+                    //moves processes from process table into multiple queues
+                    MultiProcessor.movepintoqueue(readFile.theTable);
+
                     break;
                 case 3:
                     break;

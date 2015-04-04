@@ -50,6 +50,7 @@ public class readFile {
         int tparrival = 0;
         int tpbursttime = 0;
         int tpriotime = 0;
+        int tpcontextswitch = 0;
 
         ProcessSchedules ps = new ProcessSchedules();
         //Hard coded values for now they have the ablility to change
@@ -59,9 +60,10 @@ public class readFile {
             tparrival = Integer.parseInt(newvect.get(i).get(2));
             tpbursttime = Integer.parseInt(newvect.get(i).get(3));
             tpriotime = Integer.parseInt(newvect.get(i).get(4));
+            tpcontextswitch = Integer.parseInt(newvect.get(i).get(5));
 
             ProcessControlBlock temp
-                    = new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime);
+                    = new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime, tpcontextswitch);
 
             theTable.add(temp);
             
