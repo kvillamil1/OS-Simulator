@@ -61,6 +61,7 @@ public class MultiProcessor {
             //call scheduling algorithms...runs processes in cpuqueue1 first then cpuqueue2...etc
             switch (choose) {
                 case 1:
+                    System.out.println("First Come First Serve");
                     int fcfsclockTime = 0;
                     fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue1, fcfsclockTime);
                     System.out.println(fcfsclockTime);
@@ -70,32 +71,35 @@ public class MultiProcessor {
                     System.out.println(fcfsclockTime);
                     fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue4, fcfsclockTime);
                     System.out.println(fcfsclockTime);
-                    System.out.println(throughput);
+                    System.out.println("Throughput Time: " + throughput);
                     break;
                 case 2:
+                    System.out.println("Round Robin (1)");
                     int rr1clockTime = 0;
                     ProcessSchedules.rr1(cpuqueue1, rr1clockTime);
                     ProcessSchedules.rr1(cpuqueue2, rr1clockTime);
                     ProcessSchedules.rr1(cpuqueue3, rr1clockTime);
                     ProcessSchedules.rr1(cpuqueue4, rr1clockTime);
-                    System.out.println(throughput);
+                    System.out.println("Throughput Time: " + throughput);
                     break;
                 case 3:
+                    System.out.println("Round Robin (10)");
                     int rr10clockTime = 0;
                     ProcessSchedules.rr10(cpuqueue1, rr10clockTime);
                     ProcessSchedules.rr10(cpuqueue2, rr10clockTime);
                     ProcessSchedules.rr10(cpuqueue3, rr10clockTime);
                     ProcessSchedules.rr10(cpuqueue4, rr10clockTime);
-                    System.out.println(throughput);
+                    System.out.println("Throughput Time: " + throughput);
                     break;
 
                 case 4:
+                    System.out.println("Shortest Process Next");
                     int SPNclockTime = 0;
                     ProcessSchedules.shortestnext(cpuqueue1, SPNclockTime);
                     ProcessSchedules.shortestnext(cpuqueue2, SPNclockTime);
                     ProcessSchedules.shortestnext(cpuqueue3, SPNclockTime);
                     ProcessSchedules.shortestnext(cpuqueue4, SPNclockTime);
-                    System.out.println(throughput);
+                    System.out.println("Throughput Time: " + throughput);
                     break;
                 case 5:
                     return;
