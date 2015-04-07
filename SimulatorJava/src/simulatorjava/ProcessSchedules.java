@@ -23,6 +23,8 @@ public class ProcessSchedules {
     
     //First Come First Serve Function that returns clock time
     public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int fcfsclockTime) {
+        
+
         //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
              //grab first process object off of the queue
@@ -45,9 +47,13 @@ public class ProcessSchedules {
                 burst--;
                 fcfsclockTime++;
             }
+           
+          
+            
             //When the process is done running (burst time = 0), remove it from the queue
             myQueue.remove(0);
         }
+        
         return fcfsclockTime;
     }
 

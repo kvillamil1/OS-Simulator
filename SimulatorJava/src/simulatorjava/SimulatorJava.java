@@ -31,7 +31,7 @@ public class SimulatorJava {
         //User Input Options
         int select;
         do {
-            select = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. Uniprocessor\n2. Multiprocessor\n3. Exit"));
+            select = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. Uniprocessor\n2. Multiprocessor\n3. Export to Excel Test\n4. Exit"));
 
             switch (select) {
                 case 1:
@@ -70,6 +70,9 @@ public class SimulatorJava {
 
                     break;
                 case 3:
+                    ExcelExport.exceltest();
+                    break;
+                case 4:
                     break;
             }
         } while (select <= 2);

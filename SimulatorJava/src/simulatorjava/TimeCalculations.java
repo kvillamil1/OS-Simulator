@@ -5,10 +5,34 @@
  */
 package simulatorjava;
 
+import java.util.Queue;
+
 /**
  *
  * @author JPerry1120
  */
 public class TimeCalculations {
-    
+   
+    public void calculateturnaround(ProcessControlBlock temp)
+    {
+        
+    }
+    public void calculatewait(ProcessControlBlock temp)
+    {
+        
+    }
+    public void calculateresponse(ProcessControlBlock temp)
+    {
+        
+    }
+    public void calculatethroughput(Queue<ProcessControlBlock> myQueue)
+    {
+      int counter=0;
+      while(!myQueue.isEmpty())
+      {
+        ProcessControlBlock temp1 = myQueue.poll();
+        counter++;
+      }
+      
+    }
 }
