@@ -13,26 +13,30 @@ import java.util.Queue;
  */
 public class TimeCalculations {
    
-    public void calculateturnaround(ProcessControlBlock temp)
+    public static void calculateturnaround(ProcessControlBlock temp)
     {
         
     }
-    public void calculatewait(ProcessControlBlock temp)
+    public static void calculatewait(ProcessControlBlock temp)
     {
         
     }
-    public void calculateresponse(ProcessControlBlock temp)
+    public static void calculateresponse(ProcessControlBlock temp)
     {
         
     }
-    public void calculatethroughput(Queue<ProcessControlBlock> myQueue)
+    
+//this function counts how many processes ran in a given time (in our case we decided all of them will run)
+    public static void calculatethroughput(Queue<ProcessControlBlock> myQueue)
     {
       int counter=0;
+      //while the queue is not empty, count each process object that myQueue contains
       while(!myQueue.isEmpty())
       {
         ProcessControlBlock temp1 = myQueue.poll();
         counter++;
       }
-      
+      //send the number of processes completed to be exported in Excel
+      ExcelExport.exceltest(counter);
     }
 }

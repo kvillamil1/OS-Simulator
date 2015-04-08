@@ -70,10 +70,9 @@ public class SimulatorJava {
 
                     break;
                 case 3:
-                    ExcelExport.exceltest();
+                    //ExcelExport.exceltest();
                     break;
-                case 4:
-                    break;
+              
             }
         } while (select <= 2);
     }

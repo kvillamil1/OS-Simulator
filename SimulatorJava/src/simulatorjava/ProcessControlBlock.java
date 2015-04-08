@@ -24,11 +24,6 @@ public class ProcessControlBlock {
     private int waittime;
     private int presponsetime;
     
-    
-    
-    //, int con_switch 
-    //Took this out for testing
-    
     ProcessControlBlock(int id, int pnum, int arrivaltime, int burst, int iotime, int context_switchtime)
     {
         pid = id;
@@ -48,67 +43,96 @@ public class ProcessControlBlock {
         pbursttime = burstr;
     }
     
+    //get method for processor id
     public int getpid(){
         return pid;
     }
     
+    //get method for processor priority number
     public int getprioritynum()
     {
         return prioritynum;
     }
     
+    //get method for processor arrival time
     public int getparrival()
     {
         return parrival;
     }
+    
+    //get method for process CPU burst time
     public int getbursttime()
     {
         return pbursttime;
     }
+    
+    //get method for process io time
     public int getiotime()
     {
         return piotime;
     }
+    
+    //set method for iotime
     public void setiotime(int iotime)
     {
         piotime = iotime;
     }
+    
+    //get method for context switch time
     public int getcontextswitchtime()
     {
         return pcontext_switch;
     }
-    public void setcontextswitchtime(int contextswitchtime)
-    {
-        pcontext_switch = contextswitchtime;
-    }
+    
+    //get method for turnaround time
     public int getturnaroundtime()
     {
         return turnaroundtime;
     }
-    public void setturnaroundtime(int turnaround)
-    {
-        turnaroundtime = turnaround;
-    }
-    public int getthroughputtime()
-    {
-        return throughputtime;
-    }
-    public void setthroughputtime(int tp)
-    {
-        throughputtime = tp;
-    }
-    public int getwaittime()
-    {
-        return waittime;
-    }
-    public void setwaittime(int wt)
-    {
-        waittime = wt;
-    }
+    
+    //get method for response time
     public int getresponsetime()
     {
         return presponsetime;
     }
+    
+    //get method for throughput time
+    public int getthroughputtime()
+    {
+        return throughputtime;
+    }
+    
+    //get method for wait time
+    public int getwaittime()
+    {
+        return waittime;
+    }
+    
+    //set method for context swithc time
+    public void setcontextswitchtime(int contextswitchtime)
+    {
+        pcontext_switch = contextswitchtime;
+    }
+    
+    //set method for turnaround time
+    public void setturnaroundtime(int turnaround)
+    {
+        turnaroundtime = turnaround;
+    }
+    
+    //set method for throughput time
+    public void setthroughputtime(int tp)
+    {
+        throughputtime = tp;
+    }
+    
+    //set method for wait time
+    public void setwaittime(int wt)
+    {
+        waittime = wt;
+    }
+    
+    //set method for reponse time
     public void setresponsetime(int rt)
     {
         presponsetime = rt;
