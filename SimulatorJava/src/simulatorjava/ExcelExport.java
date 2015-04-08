@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
  */
 public class ExcelExport {
 
-    public static void exceltest(int counter) {
+    public static void exceltest(Queue<ProcessControlBlock> TimeQueue) {
         try {
             File exlFile = new File("OSSimulationTestResults.xls");
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(exlFile);
@@ -66,9 +66,9 @@ public class ExcelExport {
             writableSheet.addCell(response);
             writableSheet.addCell(wait);
 
-            //Write out test results
-            Number throughputresult = new Number(6,4,counter);
-            writableSheet.addCell(throughputresult);
+//            //Write out test results
+//            Number throughputresult = new Number(6,4,counter);
+//            writableSheet.addCell(throughputresult);
             
             //Test
             int j = 10;

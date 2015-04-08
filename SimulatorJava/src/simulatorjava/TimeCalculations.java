@@ -5,6 +5,7 @@
  */
 package simulatorjava;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -27,16 +28,19 @@ public class TimeCalculations {
     }
     
 //this function counts how many processes ran in a given time (in our case we decided all of them will run)
-    public static void calculatethroughput(Queue<ProcessControlBlock> myQueue)
+    public static Queue calculatethroughput(Queue<ProcessControlBlock> myQueue)
     {
+       Queue newQueue = new LinkedList();
       int counter=0;
       //while the queue is not empty, count each process object that myQueue contains
       while(!myQueue.isEmpty())
       {
         ProcessControlBlock temp1 = myQueue.poll();
+        newQueue.add(temp1);
         counter++;
       }
       //send the number of processes completed to be exported in Excel
       ExcelExport.exceltest(counter);
+      return newQueue;
     }
 }

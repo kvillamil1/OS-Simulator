@@ -18,10 +18,10 @@ public class ProcessSchedules {
 
     //First Come First Serve Function that returns clock time
     public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int fcfsclockTime) {
- //send process queue to calculate throughput method since we've decided that all of our processes will run
-            TimeCalculations.calculatethroughput(myQueue);        
-
-//while the queue still contains process objects, run first come first serve schedule algorithm
+    //send process queue to calculate throughput method since we've decided that all of our processes will run
+       myQueue = TimeCalculations.calculatethroughput(myQueue);        
+       
+    //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
            
 
