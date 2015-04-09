@@ -14,8 +14,11 @@ import java.io.*;
  */
 public class readFile {
 
+    //Reads a random process control block that is created from random 
     public static Queue<ProcessControlBlock> theTable = new LinkedList<ProcessControlBlock>();
     
+    
+    //Load the file into a vector that will store each object as a PCB
     public static Vector<Vector<String>> load() {
         Vector<Vector<String>> loadEvent = new Vector<Vector<String>>();
         File nf = new File("PCB_Values.txt");
@@ -23,11 +26,13 @@ public class readFile {
         String Line;
         String[] newline;
 
+        //Try catch lope to read file and then sort through each line.
         try {
             BufferedReader br = new BufferedReader(new FileReader(nf));
             while ((Line = br.readLine()) != null) {
                 newline = Line.split(",");
                 Vector<String> tmp = new Vector<String>();
+                //for loop to move through each line.
                 for (int i = 0; i < newline.length; i++) {
                     tmp.add(newline[i]);
                 }
@@ -42,9 +47,9 @@ public class readFile {
     }
 
     public static Object setPCB() {
-        
-        Vector<Vector<String>> newvect = load();
+        Vector<Vector<String>> newvect = load();//loads the objects into a PCB
 
+        //These are temp variables that match the PCB Constructor.
         int tPid = 0;
         int tprioritynum = 0;
         int tparrival = 0;
@@ -62,70 +67,71 @@ public class readFile {
             tpriotime = Integer.parseInt(newvect.get(i).get(4));
             tpcontextswitch = Integer.parseInt(newvect.get(i).get(5));
 
+            //Assigns the a PCB object 
             ProcessControlBlock temp
                     = new ProcessControlBlock(tPid, tprioritynum, tparrival, tpbursttime, tpriotime, tpcontextswitch);
 
-            theTable.add(temp);
+            theTable.add(temp);//Assign the temp variable PCB to the Queue(Process Table)
             
         }
         return theTable;
     }
 
-//    
-//      public static void save(ArrayList<String> list) {
-//        File file = new File("PCB_Values.txt");
-//
-//        try {
-//            BufferedWriter buffer = new BufferedWriter(new FileWriter(file, true));
-//
-//            for (int i = 0; i < list.size(); i++) {
-//                buffer.write(list.get(i));
-//                buffer.newLine();
-//
-//            }
-//            buffer.close();
-//        } catch (Exception e) {
-//            System.out.print("There was a problem with the output file");
-//        }
-//    }
     
-//    public static void randomList()
-//    {
-//        ArrayList<String> values = new ArrayList();
-//        
-//        Random randnum = new Random();
-//        
-//        int id = 0;
-//        int randompriority =0;
-//        int arrivaltimes = 0;
-//        int randomBurst = 0 ; 
-//        int randomIO = 0;
-//        int context = 0;
-//        String tmplist = "";
-//        
-//        
-//        for(int i = 0; i < 500; i++)
-//        {
-//            id = i;
-//            randompriority = randnum.nextInt(50);
-//            arrivaltimes = 0;
-//            randomBurst = randnum.nextInt(50);
-//            randomIO = randnum.nextInt(50);
-//            context = 1;
-//            
-//            tmplist = id + "," + randompriority + "," + arrivaltimes + "," +
-//                    randomBurst + "," + randomIO + "," + context;
-//            
-//            values.add(tmplist);
-//        }
-//        
-//        
-//        save(values);
-//        
+      public static void save(ArrayList<String> list) {
+        File file = new File("PCB_Values.txt");
+
+        try {
+            BufferedWriter buffer = new BufferedWriter(new FileWriter(file, true));
+
+            for (int i = 0; i < list.size(); i++) {
+                buffer.write(list.get(i));
+                buffer.newLine();
+
+            }
+            buffer.close();
+        } catch (Exception e) {
+            System.out.print("There was a problem with the output file");
+        }
+    }
+    
+    public static void randomList()
+    {
+        ArrayList<String> values = new ArrayList();
+        
+        Random randnum = new Random();
+        
+        int id = 0;
+        int randompriority =0;
+        int arrivaltimes = 0;
+        int randomBurst = 0 ; 
+        int randomIO = 0;
+        int context = 0;
+        String tmplist = "";
+        
+        
+        for(int i = 0; i < 500; i++)
+        {
+            id = i;
+            randompriority = randnum.nextInt(50);
+            arrivaltimes = 0;
+            randomBurst = randnum.nextInt(50);
+            randomIO = randnum.nextInt(50);
+            context = 1;
+            
+            tmplist = id + "," + randompriority + "," + arrivaltimes + "," +
+                    randomBurst + "," + randomIO + "," + context;
+            
+            values.add(tmplist);
+        }
+        
+        
+        save(values);
         
         
         
-//    }
+        
+    }
     
     
     
