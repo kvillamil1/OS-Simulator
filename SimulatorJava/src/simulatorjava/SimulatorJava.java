@@ -37,27 +37,19 @@ public class SimulatorJava {
 
             switch (select) {
                 case 1:
-                    int fcfsclockTime = 0;
-                    int rr1clockTime = 0;
-                    int rr10clockTime = 0;
-                    int spnclockTime = 0;
-
+                    
                     System.out.println("Uniprocessor");
                     System.out.println("-------------------");
                     readFile.setPCB();
-                    ProcessSchedules.firstcomefirstserve(readFile.theTable);
+                    Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(readFile.theTable);
+                    String Name = "First Come First Serve";
+                    ExcelExport.exceltest(Name, TimeQueue);
                     readFile.setPCB();
-                    rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
+                    ProcessSchedules.rr1(readFile.theTable);
                     readFile.setPCB();
-                    rr10clockTime = ProcessSchedules.rr10(readFile.theTable, rr10clockTime);
+                    ProcessSchedules.rr10(readFile.theTable);
                     readFile.setPCB();
-                    spnclockTime = ProcessSchedules.shortestnext(readFile.theTable, spnclockTime);
-
-                    System.out.println("First Come First Serve = " + fcfsclockTime);
-                    System.out.println("RR1 = " + rr1clockTime);
-                    System.out.println("RR10 = " + rr10clockTime);
-                    System.out.println("Shortest Process Next = " + spnclockTime);
-                    System.out.printf("\n");
+                    //ProcessSchedules.shortestnext(readFile.theTable);
                     break;
 
                 case 2:

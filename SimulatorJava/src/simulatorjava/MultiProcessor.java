@@ -61,32 +61,48 @@ public class MultiProcessor {
             //call scheduling algorithms...runs processes in cpuqueue1 first then cpuqueue2...etc
             switch (choose) {
                 case 1:
-                    System.out.println("First Come First Serve");
+                    //run the first come first serve schedule algorithm on all (4) CPU queus 
+                        Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(cpuqueue1);
+                        Queue<ProcessControlBlock> TimeQueue1 = ProcessSchedules.firstcomefirstserve(cpuqueue2);
+                        Queue<ProcessControlBlock> TimeQueue2 = ProcessSchedules.firstcomefirstserve(cpuqueue3);
+                        Queue<ProcessControlBlock> TimeQueue3 = ProcessSchedules.firstcomefirstserve(cpuqueue4);
                     
-                    ProcessSchedules.firstcomefirstserve(cpuqueue1);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue2);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue3);
-                    ProcessSchedules.firstcomefirstserve(cpuqueue4);
-                
-                    System.out.println("Throughput Time: " + throughput);
+                    //get all of the process objects from each CPU queue on one time queue to be sent to Excel
+                    while (!TimeQueue1.isEmpty()) 
+                    {
+                        TimeQueue.add(TimeQueue1.remove());
+                    }
+                    while(!TimeQueue2.isEmpty())
+                    {
+                        TimeQueue.add(TimeQueue2.remove());
+                    }
+                    while(!TimeQueue3.isEmpty())
+                    {
+                        TimeQueue.add(TimeQueue3.remove());
+                    }
+                    
+                    //send the TimeQueue that contains all of the process information to Excel & send the name of the schedule method
+                    String name = "First Come First Serve Multiprocessor";
+                    ExcelExport.exceltest(name, TimeQueue);
+
                     break;
                 case 2:
                     System.out.println("Round Robin (1)");
                     int rr1clockTime = 0;
-                    ProcessSchedules.rr1(cpuqueue1, rr1clockTime);
-                    ProcessSchedules.rr1(cpuqueue2, rr1clockTime);
-                    ProcessSchedules.rr1(cpuqueue3, rr1clockTime);
-                    ProcessSchedules.rr1(cpuqueue4, rr1clockTime);
-                    System.out.println("Throughput Time: " + throughput);
+                    ProcessSchedules.rr1(cpuqueue1);
+                    ProcessSchedules.rr1(cpuqueue2);
+                    ProcessSchedules.rr1(cpuqueue3);
+                    ProcessSchedules.rr1(cpuqueue4);
+
                     break;
                 case 3:
                     System.out.println("Round Robin (10)");
                     int rr10clockTime = 0;
-                    ProcessSchedules.rr10(cpuqueue1, rr10clockTime);
-                    ProcessSchedules.rr10(cpuqueue2, rr10clockTime);
-                    ProcessSchedules.rr10(cpuqueue3, rr10clockTime);
-                    ProcessSchedules.rr10(cpuqueue4, rr10clockTime);
-                    System.out.println("Throughput Time: " + throughput);
+                    ProcessSchedules.rr10(cpuqueue1);
+                    ProcessSchedules.rr10(cpuqueue2);
+                    ProcessSchedules.rr10(cpuqueue3);
+                    ProcessSchedules.rr10(cpuqueue4);
+
                     break;
 
                 case 4:
@@ -104,4 +120,3 @@ public class MultiProcessor {
         } while (choose <= 4);
     }
 }
-

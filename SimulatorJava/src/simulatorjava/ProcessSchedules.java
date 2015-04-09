@@ -17,12 +17,14 @@ import java.util.Arrays;
 public class ProcessSchedules {
 
     static int globalTime = 0;
+    static int globalTimeRR = 0;
+    static int globalTimeRRThroughput = 0;
     
     //First Come First Serve Function that returns clock time
-    public static void firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
+    public static Queue<ProcessControlBlock> firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
     
 
-//send process queue to calculate throughput method since we've decided that all of our processes will run
+    //send process queue to calculate throughput method since we've decided that all of our processes will run
        myQueue = TimeCalculations.calculatethroughput(myQueue); 
        
        Queue<ProcessControlBlock> TimeQueue = new LinkedList();
@@ -66,13 +68,14 @@ public class ProcessSchedules {
             
         }
         
-        String Name = "First Come First Serve";
-        ExcelExport.exceltest(Name, TimeQueue);
+        //String Name = "First Come First Serve";
+        //ExcelExport.exceltest(Name, TimeQueue);
+        return TimeQueue;
         
     }
 
     //Round Robin Function with time quantum of 1 that returns clock time
-    public static int rr1(Queue<ProcessControlBlock> myQueue, int rrclockTime) {
+    public static void rr1(Queue<ProcessControlBlock> myQueue) {
         //while the queue still contains process objects, run round robin schedule algorithm
         while (!myQueue.isEmpty()) {
             //grab first process object off of the queue
@@ -91,7 +94,7 @@ public class ProcessSchedules {
             int burst = temp.getbursttime();
             for (int i = 0; i < 1; i++) {
                 burst--;
-                rrclockTime++;
+                //rrclockTime++;
             }
             //Checks if process is done running (burst time = 0) and if it is, remove the process object from the queue
             //else if the burst time is not 0, reset the burst time in the process object to the new burst time and add it to the end of the queue
@@ -102,11 +105,11 @@ public class ProcessSchedules {
                 myQueue.add(temp);
             }
         }
-        return rrclockTime;
+    
     }
 
     //Round Robin Function with time quantum of 10 that returns clock time
-    public static int rr10(Queue<ProcessControlBlock> myQueue, int rr10clockTime) {
+    public static void rr10(Queue<ProcessControlBlock> myQueue) {
         //while the queue still contains process objects, run round robin schedule algorithm
         while (!myQueue.isEmpty()) {
             //grab first process object off of the queue
@@ -132,7 +135,7 @@ public class ProcessSchedules {
                 } //if the process burst time is not 0, decrease the burst time and increase clock time
                 else {
                     burst--;
-                    rr10clockTime++;
+                    //rr10clockTime++;
                 }                
             }
             //if the burst time is not 0, set the new burst time for the process and add the process to the end of the queue
@@ -141,7 +144,7 @@ public class ProcessSchedules {
                 myQueue.add(temp);
             }
         }
-        return rr10clockTime;
+        
     }
     
     public static int shortestnext(Queue<ProcessControlBlock> myQueue, int spnclockTime) {
