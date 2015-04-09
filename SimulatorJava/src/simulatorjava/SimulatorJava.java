@@ -43,7 +43,7 @@ public class SimulatorJava {
                     System.out.println("Uniprocessor");
                     System.out.println("-------------------");
                     readFile.setPCB();
-                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(readFile.theTable, fcfsclockTime);
+                    ProcessSchedules.firstcomefirstserve(readFile.theTable);
                     readFile.setPCB();
                     rr1clockTime = ProcessSchedules.rr1(readFile.theTable, rr1clockTime);
                     readFile.setPCB();

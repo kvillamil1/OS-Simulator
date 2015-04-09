@@ -22,10 +22,10 @@ public class MultiProcessor {
         int throughput = 0;
 
         //create 4 cpu process Queues
-        Queue cpuqueue1 = new LinkedList();
-        Queue cpuqueue2 = new LinkedList();
-        Queue cpuqueue3 = new LinkedList();
-        Queue cpuqueue4 = new LinkedList();
+        Queue<ProcessControlBlock> cpuqueue1 = new LinkedList();
+        Queue<ProcessControlBlock> cpuqueue2 = new LinkedList();
+        Queue<ProcessControlBlock> cpuqueue3 = new LinkedList();
+        Queue<ProcessControlBlock> cpuqueue4 = new LinkedList();
 
         //move processes from process table into cpu queues (Deidicated Processor Approach)
         while (!myQueue.isEmpty()) {
@@ -62,15 +62,12 @@ public class MultiProcessor {
             switch (choose) {
                 case 1:
                     System.out.println("First Come First Serve");
-                    int fcfsclockTime = 0;
-                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue1, fcfsclockTime);
-                    System.out.println(fcfsclockTime);
-                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue2, fcfsclockTime);
-                    System.out.println(fcfsclockTime);
-                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue3, fcfsclockTime);
-                    System.out.println(fcfsclockTime);
-                    fcfsclockTime = ProcessSchedules.firstcomefirstserve(cpuqueue4, fcfsclockTime);
-                    System.out.println(fcfsclockTime);
+                    
+                    ProcessSchedules.firstcomefirstserve(cpuqueue1);
+                    ProcessSchedules.firstcomefirstserve(cpuqueue2);
+                    ProcessSchedules.firstcomefirstserve(cpuqueue3);
+                    ProcessSchedules.firstcomefirstserve(cpuqueue4);
+                
                     System.out.println("Throughput Time: " + throughput);
                     break;
                 case 2:

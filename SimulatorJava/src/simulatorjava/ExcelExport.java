@@ -22,7 +22,7 @@ import java.text.SimpleDateFormat;
  */
 public class ExcelExport {
 
-    public static void exceltest(Queue<ProcessControlBlock> TimeQueue) {
+    public static void exceltest(String nameofmethod, Queue<ProcessControlBlock> TimeQueue) {
         try {
             File exlFile = new File("OSSimulationTestResults.xls");
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(exlFile);
@@ -39,7 +39,7 @@ public class ExcelExport {
 
             //DONT FORGET TO SEND METHOD NAME!!!!!!!!!!!
             //Label header names
-            //Label schedulemethod = new Label(0, 2, method);
+            Label schedulemethod = new Label(0, 2, nameofmethod);
             Label pid = new Label(0, 3, "Process ID");
             Label arrival = new Label(1,3, "Arrival Time");
             Label burst = new Label(2, 3, "Burst Time");
@@ -49,13 +49,14 @@ public class ExcelExport {
             Label throughput = new Label(6, 3, "Throughput Time");
             Label response = new Label(7, 3, "Response Time");
             Label wait = new Label(8, 3, "Wait Time");
+         
 
             //Add the created Cells to the sheet
             writableSheet.addCell(label);
             writableSheet.addCell(date);
             //writableSheet.addCell(bool);  <---for reference
-            //  writableSheet.addCell(num); <---for reference
-           // writableSheet.addCell(schedulemethod);
+           // writableSheet.addCell(num); <---for reference
+            writableSheet.addCell(schedulemethod);
             writableSheet.addCell(pid);
             writableSheet.addCell(arrival);
             writableSheet.addCell(burst);
@@ -70,13 +71,61 @@ public class ExcelExport {
 //            Number throughputresult = new Number(6,4,counter);
 //            writableSheet.addCell(throughputresult);
             
-            //Test
-            int j = 10;
-            for (int i = 0; i < 10; i++) {
-                Label labelTest = new Label(0, j, "Jordanne");
-                writableSheet.addCell(labelTest);
+            
+            int j=5;
+            while(!TimeQueue.isEmpty())
+            {
+                int i=0;
+                ProcessControlBlock stuff = TimeQueue.poll();
+                
+                Number processid = new Number(i,j,stuff.getpid());
+                writableSheet.addCell(processid);
+                i++;
+                
+                Number arrivaltime = new Number(i,j,stuff.getparrival());
+                writableSheet.addCell(arrivaltime);
+                i++;
+                
+                Number bursttime = new Number(i,j,stuff.getbursttime());
+                writableSheet.addCell(bursttime);
+                i++;
+                
+                Number iotime = new Number(i,j,stuff.getiotime());
+                writableSheet.addCell(iotime);
+                i++;
+                
+                Number contextswitch = new Number(i,j,stuff.getcontextswitchtime());
+                writableSheet.addCell(contextswitch);
+                i++;
+                
+                Number turn = new Number(i,j,stuff.getturnaroundtime());
+                writableSheet.addCell(turn);
+                i++;
+                
+                Number through = new Number(i,j,stuff.getthroughputtime());
+                writableSheet.addCell(through);
+                i++;
+                
+                Number respond = new Number(i,j,stuff.getresponsetime());
+                writableSheet.addCell(respond);
+                i++;
+                
+                Number waiter = new Number(i,j,stuff.getwaittime());
+                writableSheet.addCell(waiter);
+                i++;
+                
+                //TimeQueue.remove();
                 j++;
+                
             }
+            
+            //Test
+//            int j = 10;
+//            for (int i = 0; i < 10; i++) {
+//                Label labelTest = new Label(0, j, "Jordanne");
+//                writableSheet.addCell(labelTest);
+//                j++;
+//            }
             
             
             

@@ -16,10 +16,16 @@ import java.util.Arrays;
  */
 public class ProcessSchedules {
 
+    static int globalTime = 0;
+    
     //First Come First Serve Function that returns clock time
-    public static int firstcomefirstserve(Queue<ProcessControlBlock> myQueue, int fcfsclockTime) {
-    //send process queue to calculate throughput method since we've decided that all of our processes will run
-       myQueue = TimeCalculations.calculatethroughput(myQueue);        
+    public static void firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
+    
+
+//send process queue to calculate throughput method since we've decided that all of our processes will run
+       myQueue = TimeCalculations.calculatethroughput(myQueue); 
+       
+       Queue<ProcessControlBlock> TimeQueue = new LinkedList();
        
     //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
@@ -27,6 +33,9 @@ public class ProcessSchedules {
 
             //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
+            
+            temp.setresponsetime(globalTime);
+            temp.setwaittime(globalTime);
 
             //get the io time for each process
             int io = temp.getiotime();
@@ -36,6 +45,10 @@ public class ProcessSchedules {
             if (io > 0) {
                 ioclockTime = IOProcessing.processIO(temp, ioclockTime);
             }
+            
+            globalTime += ioclockTime;
+            globalTime += temp.getcontextswitchtime();
+            
 
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
@@ -43,12 +56,19 @@ public class ProcessSchedules {
             //while the process burst time is not 0, decrement the burst time by one and increase clock time by one
             while (burst != 0) {
                 burst--;
-                fcfsclockTime++;
+                globalTime++;
             }
+            
+            temp.setturnaroundtime(globalTime);
+            TimeQueue.add(temp);
             //When the process is done running (burst time = 0), remove it from the queue
             myQueue.remove(0);
+            
         }
-        return fcfsclockTime;
+        
+        String Name = "First Come First Serve";
+        ExcelExport.exceltest(Name, TimeQueue);
+        
     }
 
     //Round Robin Function with time quantum of 1 that returns clock time

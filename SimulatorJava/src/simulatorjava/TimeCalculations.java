@@ -30,8 +30,11 @@ public class TimeCalculations {
 //this function counts how many processes ran in a given time (in our case we decided all of them will run)
     public static Queue calculatethroughput(Queue<ProcessControlBlock> myQueue)
     {
-       Queue newQueue = new LinkedList();
+       Queue<ProcessControlBlock> newQueue = new LinkedList();
+       Queue<ProcessControlBlock> newQueue1 = new LinkedList();
+       
       int counter=0;
+      
       //while the queue is not empty, count each process object that myQueue contains
       while(!myQueue.isEmpty())
       {
@@ -39,8 +42,16 @@ public class TimeCalculations {
         newQueue.add(temp1);
         counter++;
       }
+      
+      while(!newQueue.isEmpty())
+      {
+          ProcessControlBlock temp2 = newQueue.poll();
+          temp2.setthroughputtime(counter);
+          newQueue1.add(temp2);
+      }
+      
       //send the number of processes completed to be exported in Excel
-      ExcelExport.exceltest(counter);
-      return newQueue;
+      //ExcelExport.exceltest(counter);
+      return newQueue1;
     }
 }
