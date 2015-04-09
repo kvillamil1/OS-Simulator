@@ -32,23 +32,18 @@ public class MultiProcessor {
             ProcessControlBlock temp = myQueue.poll();
             if (i == 1) {
                 cpuqueue1.add(temp);
-                throughput++;
                 i++;
             } else if (i == 2) {
                 cpuqueue2.add(temp);
-                throughput++;
                 i++;
             } else if (i == 3) {
                 cpuqueue3.add(temp);
-                throughput++;
                 i++;
             } else if (i == 4) {
                 cpuqueue4.add(temp);
-                throughput++;
                 i++;
             } else if (i == 5) {
                 cpuqueue1.add(temp);
-                throughput++;
                 i = 2;
             }
         }
@@ -107,12 +102,29 @@ public class MultiProcessor {
 
                 case 4:
                     System.out.println("Shortest Process Next");
-                    int SPNclockTime = 0;
-                    ProcessSchedules.shortestnext(cpuqueue1, SPNclockTime);
-                    ProcessSchedules.shortestnext(cpuqueue2, SPNclockTime);
-                    ProcessSchedules.shortestnext(cpuqueue3, SPNclockTime);
-                    ProcessSchedules.shortestnext(cpuqueue4, SPNclockTime);
-                    System.out.println("Throughput Time: " + throughput);
+                    Queue<ProcessControlBlock> TimeQueueSPN = ProcessSchedules.shortestnext(cpuqueue1);
+                    Queue<ProcessControlBlock> TimeQueueSPN1 = ProcessSchedules.shortestnext(cpuqueue2);
+                    Queue<ProcessControlBlock> TimeQueueSPN2 = ProcessSchedules.shortestnext(cpuqueue3);
+                    Queue<ProcessControlBlock> TimeQueueSPN3 = ProcessSchedules.shortestnext(cpuqueue4);
+                    
+                    //get all of the process objects from each CPU queue on one time queue to be sent to Excel
+                    while (!TimeQueueSPN1.isEmpty()) 
+                    {
+                        TimeQueueSPN.add(TimeQueueSPN1.remove());
+                    }
+                    while(!TimeQueueSPN2.isEmpty())
+                    {
+                        TimeQueueSPN.add(TimeQueueSPN2.remove());
+                    }
+                    while(!TimeQueueSPN3.isEmpty())
+                    {
+                        TimeQueueSPN.add(TimeQueueSPN3.remove());
+                    }
+                    
+                     //send the TimeQueue that contains all of the process information to Excel & send the name of the schedule method
+                    String nameSPN = "SPN Multiprocessor";
+                    ExcelExport.exceltest(nameSPN, TimeQueueSPN);
+                    
                     break;
                 case 5:
                     return;

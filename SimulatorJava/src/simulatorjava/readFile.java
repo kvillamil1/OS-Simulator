@@ -21,7 +21,7 @@ public class readFile {
     //Load the file into a vector that will store each object as a PCB
     public static Vector<Vector<String>> load() {
         Vector<Vector<String>> loadEvent = new Vector<Vector<String>>();
-        File nf = new File("PCB_Values.txt");
+        File nf = new File("TEST_VALUES.txt");
 
         String Line;
         String[] newline;

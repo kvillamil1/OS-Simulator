@@ -28,7 +28,8 @@ public class SimulatorJava {
         //Test for read in file
         //System.out.println(readFile.load());        
 
-        readFile.randomList();
+        //readFile.randomList(); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        readFile.load();
         //User Input Options
         
         int select;

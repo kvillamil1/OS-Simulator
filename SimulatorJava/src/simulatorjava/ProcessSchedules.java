@@ -19,6 +19,7 @@ public class ProcessSchedules {
     static int globalTime = 0;
     static int globalTimeRR = 0;
     static int globalTimeRRThroughput = 0;
+    static int globalTimeSPN = 0;
     
     //First Come First Serve Function that returns clock time
     public static Queue<ProcessControlBlock> firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
@@ -147,9 +148,13 @@ public class ProcessSchedules {
         
     }
     
-    public static int shortestnext(Queue<ProcessControlBlock> myQueue, int spnclockTime) {
+    public static Queue shortestnext(Queue<ProcessControlBlock> myQueue) {
         ArrayList<ProcessControlBlock> spn = new ArrayList<ProcessControlBlock>();
         int counter = myQueue.size();
+        
+        //send process queue to calculate throughput method since we've decided that all of our processes will run
+       myQueue = TimeCalculations.calculatethroughput(myQueue); 
+       Queue<ProcessControlBlock> TimeQueueSPN = new LinkedList();
 
         // empties queue into array 
         while (!myQueue.isEmpty()) {
@@ -160,7 +165,7 @@ public class ProcessSchedules {
             }
         }
 
-        //sort through array and find shortest burst time
+        //sort through array and find process with shortest burst time
         while (!spn.isEmpty()) {
             
             ProcessControlBlock tempshortest = spn.get(0);
@@ -172,7 +177,11 @@ public class ProcessSchedules {
                     
                 }
             }
-
+            
+            //set response and wait time for current shortest process
+            tempshortest.setresponsetime(globalTimeSPN);
+            tempshortest.setwaittime(globalTimeSPN);
+            
             //get the io time for each process
             int io = tempshortest.getiotime();
             int ioclockTime = 0;
@@ -181,6 +190,10 @@ public class ProcessSchedules {
             if (io > 0) {
                 ioclockTime = IOProcessing.processIO(tempshortest, ioclockTime);
             }
+            
+            //Update globalTimeSPN with io and context switch time
+            globalTimeSPN += ioclockTime;
+            globalTimeSPN += tempshortest.getcontextswitchtime();
 
             //set shortest burst time to burst
             int burst = tempshortest.getbursttime();
@@ -189,12 +202,14 @@ public class ProcessSchedules {
             //remove process when finished)
             while (burst != 0) {
                 burst--;
-                spnclockTime++;
+                globalTimeSPN++;
             }
+            tempshortest.setturnaroundtime(globalTimeSPN);
+            TimeQueueSPN.add(tempshortest);
             spn.remove(tempshortest);
         }
         
-        return spnclockTime;
+        return TimeQueueSPN;
     }
     
 }
