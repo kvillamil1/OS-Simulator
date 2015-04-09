@@ -28,7 +28,9 @@ public class SimulatorJava {
         //Test for read in file
         //System.out.println(readFile.load());        
 
+        readFile.randomList();
         //User Input Options
+        
         int select;
         do {
             select = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. Uniprocessor\n2. Multiprocessor\n3. Export to Excel Test\n4. Exit"));

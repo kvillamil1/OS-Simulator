@@ -59,7 +59,7 @@ public class readFile {
 
         ProcessSchedules ps = new ProcessSchedules();
         //Hard coded values for now they have the ablility to change
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < newvect.size(); i++) {
             tPid = Integer.parseInt(newvect.get(i).get(0));
             tprioritynum = Integer.parseInt(newvect.get(i).get(1));
             tparrival = Integer.parseInt(newvect.get(i).get(2));
@@ -80,19 +80,21 @@ public class readFile {
     
       public static void save(ArrayList<String> list) {
         File file = new File("PCB_Values.txt");
-
+        
         try {
             BufferedWriter buffer = new BufferedWriter(new FileWriter(file, true));
-
+            FileOutputStream f = new FileOutputStream(file, false);
             for (int i = 0; i < list.size(); i++) {
                 buffer.write(list.get(i));
                 buffer.newLine();
 
             }
             buffer.close();
+            f.close();
         } catch (Exception e) {
             System.out.print("There was a problem with the output file");
         }
+        
     }
     
     public static void randomList()
