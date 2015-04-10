@@ -67,7 +67,8 @@ public class ProcessSchedules {
             // myQueue.remove(0);
 
         }
-
+        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        globalTime = 0;
         //String Name = "First Come First Serve";
         //ExcelExport.exceltest(Name, TimeQueue);
         return TimeQueue;
@@ -128,6 +129,8 @@ public class ProcessSchedules {
             }
 
         }
+        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        globalTimeRR = 0;
         return TimeQueue;
     }
 
@@ -186,6 +189,9 @@ public class ProcessSchedules {
                 myQueue.add(temp);
             }
         }
+        
+        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        globalTimeRR10 = 0;
         return TimeQueue;
     }
 
@@ -253,6 +259,8 @@ public class ProcessSchedules {
             spn.remove(tempshortest);
         }
         
+        TimeQueueSPN = AverageCalculations.averageTurnaround(TimeQueueSPN);
+        globalTimeSPN = 0;
         return TimeQueueSPN;
     }
 
