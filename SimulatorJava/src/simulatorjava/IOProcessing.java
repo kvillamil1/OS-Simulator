@@ -7,11 +7,13 @@ package simulatorjava;
 import java.util.*;
 
 /**
- *
+ * Deals with processes that have IO times
  * @author Kat
  */
 public class IOProcessing {
     
+    //IO times for processes are decremented (executed) and ioclockTime is incremented
+    //returns the ioclockTime
     public static int processIO(ProcessControlBlock p, int ioclockTime) {
         int ioTime = p.getiotime();
         while(ioTime!=0) {

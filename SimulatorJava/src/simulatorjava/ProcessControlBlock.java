@@ -6,7 +6,7 @@
 package simulatorjava;
 
 /**
- *
+ * Assigns all attributes to processes (getters and setters)
  * @author stephenthoen
  */
 public class ProcessControlBlock {

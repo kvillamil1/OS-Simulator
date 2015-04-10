@@ -12,7 +12,7 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * Setup for Multiprocessor algorithms
  * @author JPerry1120
  */
 public class MultiProcessor {
@@ -55,6 +55,8 @@ public class MultiProcessor {
 
             //call scheduling algorithms...runs processes in cpuqueue1 first then cpuqueue2...etc
             switch (choose) {
+                
+                //FCFS
                 case 1:
                     //run the first come first serve schedule algorithm on all (4) CPU queus 
                     Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(cpuqueue1);
@@ -81,7 +83,8 @@ public class MultiProcessor {
                     ExcelExport.exceltest(name, TimeQueue);
 
                     break;
-
+                
+                //RR1
                 case 2:
                     //run the Round Robin schedule algorithm on all (4) CPU queus 
                     Queue<ProcessControlBlock> TimeQueueRR = ProcessSchedules.rr1(cpuqueue1);
@@ -107,7 +110,8 @@ public class MultiProcessor {
                     String nameRR = "Round Robin Multiprocessor";
                     ExcelExport.exceltest(nameRR, TimeQueueRR);
                     break;
-
+                    
+                //RR10
                 case 3:
                     //run the Round Robin schedule algorithm on all (4) CPU queus 
                     Queue<ProcessControlBlock> TimeQueue10RR = ProcessSchedules.rr10(cpuqueue1);
@@ -134,6 +138,7 @@ public class MultiProcessor {
                     ExcelExport.exceltest(nameRR10, TimeQueue10RR);
                     break;
 
+                //SPN
                 case 4:
                     System.out.println("Shortest Process Next");
                     Queue<ProcessControlBlock> TimeQueueSPN = ProcessSchedules.shortestnext(cpuqueue1);
@@ -160,9 +165,11 @@ public class MultiProcessor {
                     ExcelExport.exceltest(nameSPN, TimeQueueSPN);
                     
                     break;
+                    
+                //Return to menu
                 case 5:
                     return;
             }
-        } while (choose <= 4);
+        } while (choose <= 4); //loops through until user decided to return to menu
     }
 }

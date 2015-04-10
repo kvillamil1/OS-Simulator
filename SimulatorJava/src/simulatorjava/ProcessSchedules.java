@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.Arrays;
 
 /**
- *
+ * Algorithms (FCFS, RR1, RR10, SPN)
  * @author JPerry1120
  */
 public class ProcessSchedules {
@@ -21,8 +21,8 @@ public class ProcessSchedules {
     static int globalTimeRR = 0;
     static int globalTimeRRThroughput = 0;
     static int globalTimeSPN = 0;
-    
     static int globalTimeRR10 = 0;
+    
     //First Come First Serve Function that returns clock time
     public static Queue<ProcessControlBlock> firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
 
@@ -63,14 +63,12 @@ public class ProcessSchedules {
 
             temp.setturnaroundtime(globalTime);
             TimeQueue.add(temp);
-            //When the process is done running (burst time = 0), remove it from the queue
-            // myQueue.remove(0);
-
         }
-        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        
+        //Calculate Averages (Turnaround, response, Wait) for entire algorithm
+        TimeQueue = AverageCalculations.average(TimeQueue);
         globalTime = 0;
-        //String Name = "First Come First Serve";
-        //ExcelExport.exceltest(Name, TimeQueue);
+        
         return TimeQueue;
 
     }
@@ -129,8 +127,11 @@ public class ProcessSchedules {
             }
 
         }
-        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        
+        //Calculate Averages (Turnaround, response, Wait) for entire algorithm
+        TimeQueue = AverageCalculations.average(TimeQueue);
         globalTimeRR = 0;
+        
         return TimeQueue;
     }
 
@@ -190,19 +191,20 @@ public class ProcessSchedules {
             }
         }
         
-        TimeQueue = AverageCalculations.averageTurnaround(TimeQueue);
+        //Calculate Averages (Turnaround, response, Wait) for entire algorithm
+        TimeQueue = AverageCalculations.average(TimeQueue);
         globalTimeRR10 = 0;
+        
         return TimeQueue;
     }
 
-    
+    //Shortest Process Next Algorithm
     public static Queue shortestnext(Queue<ProcessControlBlock> myQueue) {
-
-    
+       
         ArrayList<ProcessControlBlock> spn = new ArrayList<ProcessControlBlock>();
         int counter = myQueue.size();
         
-        //send process queue to calculate throughput method since we've decided that all of our processes will run
+       //send process queue to calculate throughput method since we've decided that all of our processes will run
        myQueue = TimeCalculations.calculatethroughput(myQueue); 
        Queue<ProcessControlBlock> TimeQueueSPN = new LinkedList();
 
@@ -254,13 +256,17 @@ public class ProcessSchedules {
                 burst--;
                 globalTimeSPN++;
             }
+            
+            //Set turnaround time for process and add to TimeQueueSPN
             tempshortest.setturnaroundtime(globalTimeSPN);
             TimeQueueSPN.add(tempshortest);
             spn.remove(tempshortest);
         }
         
-        TimeQueueSPN = AverageCalculations.averageTurnaround(TimeQueueSPN);
+        //Calculate Averages (Turnaround, response, Wait) for entire algorithm
+        TimeQueueSPN = AverageCalculations.average(TimeQueueSPN);
         globalTimeSPN = 0;
+        
         return TimeQueueSPN;
     }
 

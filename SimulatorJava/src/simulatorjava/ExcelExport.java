@@ -15,9 +15,13 @@ import jxl.write.Boolean;
 import jxl.write.biff.RowsExceededException;
 import jxl.write.*;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jxl.read.biff.BiffException;
+import jxl.Sheet;
 
 /**
- *
+ * Exports all data to Excel file
  * @author JPerry1120
  */
 public class ExcelExport {
@@ -29,13 +33,15 @@ public class ExcelExport {
 
             WritableSheet writableSheet = writableWorkbook.createSheet(
                     "Simulation Test Results", 0);
+            
+            WritableSheet writableSheet1 = writableWorkbook.createSheet(
+                    "Simulation Average", 1);
+            
 
             //Create Cells with contents of different data types.
             //Also specify the Cell coordinates in the constructor
             Label label = new Label(0, 0, "Simulation");
             DateTime date = new DateTime(10, 0, new Date());
-             // Boolean bool = new Boolean(2, 0, true);
-            // Number num = new Number(3, 0, 9.99);
 
             //DONT FORGET TO SEND METHOD NAME!!!!!!!!!!!
             //Label header names
@@ -54,8 +60,6 @@ public class ExcelExport {
             //Add the created Cells to the sheet
             writableSheet.addCell(label);
             writableSheet.addCell(date);
-            //writableSheet.addCell(bool);  <---for reference
-           // writableSheet.addCell(num); <---for reference
             writableSheet.addCell(schedulemethod);
             writableSheet.addCell(pid);
             writableSheet.addCell(arrival);
@@ -67,10 +71,6 @@ public class ExcelExport {
             writableSheet.addCell(response);
             writableSheet.addCell(wait);
 
-//            //Write out test results
-//            Number throughputresult = new Number(6,4,counter);
-//            writableSheet.addCell(throughputresult);
-            
             
            int j=5;
             while(!TimeQueue.isEmpty())
@@ -114,21 +114,10 @@ public class ExcelExport {
                 writableSheet.addCell(waiter);
                 i++;
                 
-                //TimeQueue.remove();
                 j++;
                 
             }
-            
-            //Test
-//            int j = 10;
-//            for (int i = 0; i < 10; i++) {
-//                Label labelTest = new Label(0, j, "Jordanne");
-//                writableSheet.addCell(labelTest);
-//                j++;
-//            }
-            
-            
-            
+                              
             //Write and close the workbook
             writableWorkbook.write();
             writableWorkbook.close();
