@@ -16,6 +16,7 @@ public class ProcessControlBlock {
     private int parrival;
     
     private int pbursttime;
+    private int pbursttimerr;
     private int piotime;
     private int pcontext_switch;
     
@@ -30,6 +31,7 @@ public class ProcessControlBlock {
         prioritynum = pnum;
         parrival = arrivaltime;
         pbursttime = burst; 
+        pbursttimerr = burst;
         piotime = iotime;
         pcontext_switch = context_switchtime;
         
@@ -41,6 +43,10 @@ public class ProcessControlBlock {
     public void setburst(int burstr)
     {
         pbursttime = burstr;
+    }
+    public void setburstrr(int burstrr)
+    {
+        pbursttimerr = burstrr;
     }
     
     //get method for processor id
@@ -64,6 +70,12 @@ public class ProcessControlBlock {
     public int getbursttime()
     {
         return pbursttime;
+    }
+    
+     //get method for process CPU burst time for Round Robin
+    public int getbursttimerr()
+    {
+        return pbursttimerr;
     }
     
     //get method for process io time

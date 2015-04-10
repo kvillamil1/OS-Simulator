@@ -21,14 +21,14 @@ import java.text.SimpleDateFormat;
  * @author JPerry1120
  */
 public class ExcelExport {
-
+    
     public static void exceltest(String nameofmethod, Queue<ProcessControlBlock> TimeQueue) {
         try {
-            File exlFile = new File("OSSimulationTestResults.xls");
+            File exlFile = new File("Simulation.xls");
             WritableWorkbook writableWorkbook = Workbook.createWorkbook(exlFile);
 
             WritableSheet writableSheet = writableWorkbook.createSheet(
-                    "Operating Systems Simulation Test Results", 0);
+                    "Simulation Test Results", 0);
 
             //Create Cells with contents of different data types.
             //Also specify the Cell coordinates in the constructor
@@ -72,7 +72,7 @@ public class ExcelExport {
 //            writableSheet.addCell(throughputresult);
             
             
-            int j=5;
+           int j=5;
             while(!TimeQueue.isEmpty())
             {
                 int i=0;

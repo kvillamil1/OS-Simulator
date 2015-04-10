@@ -57,47 +57,81 @@ public class MultiProcessor {
             switch (choose) {
                 case 1:
                     //run the first come first serve schedule algorithm on all (4) CPU queus 
-                        Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(cpuqueue1);
-                        Queue<ProcessControlBlock> TimeQueue1 = ProcessSchedules.firstcomefirstserve(cpuqueue2);
-                        Queue<ProcessControlBlock> TimeQueue2 = ProcessSchedules.firstcomefirstserve(cpuqueue3);
-                        Queue<ProcessControlBlock> TimeQueue3 = ProcessSchedules.firstcomefirstserve(cpuqueue4);
-                    
+                    Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(cpuqueue1);
+                    Queue<ProcessControlBlock> TimeQueue1 = ProcessSchedules.firstcomefirstserve(cpuqueue2);
+                    Queue<ProcessControlBlock> TimeQueue2 = ProcessSchedules.firstcomefirstserve(cpuqueue3);
+                    Queue<ProcessControlBlock> TimeQueue3 = ProcessSchedules.firstcomefirstserve(cpuqueue4);
+
                     //get all of the process objects from each CPU queue on one time queue to be sent to Excel
                     while (!TimeQueue1.isEmpty()) 
                     {
-                        TimeQueue.add(TimeQueue1.remove());
+                        TimeQueue.add(TimeQueue1.poll());
                     }
-                    while(!TimeQueue2.isEmpty())
+                    while (!TimeQueue2.isEmpty()) 
                     {
-                        TimeQueue.add(TimeQueue2.remove());
+                        TimeQueue.add(TimeQueue2.poll());
                     }
-                    while(!TimeQueue3.isEmpty())
+                    while (!TimeQueue3.isEmpty()) 
                     {
-                        TimeQueue.add(TimeQueue3.remove());
+                        TimeQueue.add(TimeQueue3.poll());
                     }
-                    
+
                     //send the TimeQueue that contains all of the process information to Excel & send the name of the schedule method
                     String name = "First Come First Serve Multiprocessor";
                     ExcelExport.exceltest(name, TimeQueue);
 
                     break;
+
                 case 2:
-                    System.out.println("Round Robin (1)");
-                    int rr1clockTime = 0;
-                    ProcessSchedules.rr1(cpuqueue1);
-                    ProcessSchedules.rr1(cpuqueue2);
-                    ProcessSchedules.rr1(cpuqueue3);
-                    ProcessSchedules.rr1(cpuqueue4);
+                    //run the Round Robin schedule algorithm on all (4) CPU queus 
+                    Queue<ProcessControlBlock> TimeQueueRR = ProcessSchedules.rr1(cpuqueue1);
+                    Queue<ProcessControlBlock> TimeQueue1RR = ProcessSchedules.rr1(cpuqueue2);
+                    Queue<ProcessControlBlock> TimeQueue2RR = ProcessSchedules.rr1(cpuqueue3);
+                    Queue<ProcessControlBlock> TimeQueue3RR = ProcessSchedules.rr1(cpuqueue4);
 
+                    //get all of the process objects from each CPU queue on one time queue to be sent to Excel
+                    while (!TimeQueue1RR.isEmpty()) 
+                    {
+                        TimeQueueRR.add(TimeQueue1RR.poll());
+                    }
+                    while (!TimeQueue2RR.isEmpty()) 
+                    {
+                        TimeQueueRR.add(TimeQueue2RR.poll());
+                    }
+                    while (!TimeQueue3RR.isEmpty()) 
+                    {
+                        TimeQueueRR.add(TimeQueue3RR.poll());
+                    }
+
+                    //send the TimeQueue that contains all of the process information to Excel & send the name of the schedule method
+                    String nameRR = "Round Robin Multiprocessor";
+                    ExcelExport.exceltest(nameRR, TimeQueueRR);
                     break;
-                case 3:
-                    System.out.println("Round Robin (10)");
-                    int rr10clockTime = 0;
-                    ProcessSchedules.rr10(cpuqueue1);
-                    ProcessSchedules.rr10(cpuqueue2);
-                    ProcessSchedules.rr10(cpuqueue3);
-                    ProcessSchedules.rr10(cpuqueue4);
 
+                case 3:
+                    //run the Round Robin schedule algorithm on all (4) CPU queus 
+                    Queue<ProcessControlBlock> TimeQueue10RR = ProcessSchedules.rr10(cpuqueue1);
+                    Queue<ProcessControlBlock> TimeQueue102RR = ProcessSchedules.rr10(cpuqueue2);
+                    Queue<ProcessControlBlock> TimeQueue103RR = ProcessSchedules.rr10(cpuqueue3);
+                    Queue<ProcessControlBlock> TimeQueue104RR = ProcessSchedules.rr10(cpuqueue4);
+
+                    //get all of the process objects from each CPU queue on one time queue to be sent to Excel
+                    while (!TimeQueue102RR.isEmpty()) 
+                    {
+                        TimeQueue10RR.add(TimeQueue102RR.poll());
+                    }
+                    while (!TimeQueue103RR.isEmpty()) 
+                    {
+                        TimeQueue10RR.add(TimeQueue103RR.poll());
+                    }
+                    while (!TimeQueue104RR.isEmpty()) 
+                    {
+                        TimeQueue10RR.add(TimeQueue104RR.poll());
+                    }
+
+                    //send the TimeQueue that contains all of the process information to Excel & send the name of the schedule method
+                    String nameRR10 = "Round Robin (Q=10) Multiprocessor";
+                    ExcelExport.exceltest(nameRR10, TimeQueue10RR);
                     break;
 
                 case 4:

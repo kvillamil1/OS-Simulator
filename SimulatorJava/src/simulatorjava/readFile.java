@@ -21,8 +21,8 @@ public class readFile {
     //Load the file into a vector that will store each object as a PCB
     public static Vector<Vector<String>> load() {
         Vector<Vector<String>> loadEvent = new Vector<Vector<String>>();
-        File nf = new File("TEST_VALUES.txt");
-
+        //File nf = new File("TEST_VALUES.txt");
+        File nf = new File("PCB_Values.txt");
         String Line;
         String[] newline;
 
@@ -117,7 +117,7 @@ public class readFile {
             id = i;
             randompriority = randnum.nextInt(50);
             arrivaltimes = 0;
-            randomBurst = randnum.nextInt(50);
+            randomBurst = randnum.nextInt(99) + 1;
             randomIO = randnum.nextInt(50);
             context = 1;
             

@@ -28,8 +28,8 @@ public class SimulatorJava {
         //Test for read in file
         //System.out.println(readFile.load());        
 
-        //readFile.randomList(); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        readFile.load();
+        readFile.randomList(); 
+        //readFile.load();
         //User Input Options
 
         int select1;
@@ -48,30 +48,38 @@ public class SimulatorJava {
                                 + "\n4. SPN\n5. Return to Menu"));
                         switch (select2) {
                             case 1:
-                                //readFile.setPCB();
-                                //Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(readFile.theTable);
-                                //String Name = "First Come First Serve";
-                                //ExcelExport.exceltest(Name, TimeQueue);
+                                readFile.setPCB();
+                                Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(readFile.theTable);
+                                String Name = "First Come First Serve";
+                                ExcelExport.exceltest(Name, TimeQueue);
+
                                 System.out.println("FCFS");
                                 break;
 
                             case 2:
-                                //readFile.setPCB();
-                                //ProcessSchedules.rr1(readFile.theTable);
+                                readFile.setPCB();
+                                Queue<ProcessControlBlock> TimeQueueRR1 = ProcessSchedules.rr1(readFile.theTable);
+                                String NameRR1 = "Round Robin (Q=1)";
+                                ExcelExport.exceltest(NameRR1, TimeQueueRR1);
+
                                 System.out.println("RR1");
                                 break;
 
                             case 3:
-                                //readFile.setPCB();
-                                //ProcessSchedules.rr10(readFile.theTable);
+                                readFile.setPCB();
+                                Queue<ProcessControlBlock> TimeQueueRR10 = ProcessSchedules.rr10(readFile.theTable);
+                                String NameRR10 = "Round Robin (Q=10)";
+                               ExcelExport.exceltest(NameRR10, TimeQueueRR10);
+
                                 System.out.println("RR10");
                                 break;
 
                             case 4:
-                                //readFile.setPCB();
-                                //Queue<ProcessControlBlock> TimeQueueSPN = ProcessSchedules.shortestnext(readFile.theTable);
-                                //String NameSPN = "SPN";
-                                //ExcelExport.exceltest(NameSPN, TimeQueueSPN);
+                                readFile.setPCB();
+                                Queue<ProcessControlBlock> TimeQueueSPN = ProcessSchedules.shortestnext(readFile.theTable);
+                                String NameSPN = "SPN";
+                                ExcelExport.exceltest(NameSPN, TimeQueueSPN);
+
                                 System.out.println("SPN");
                                 break;
 
@@ -79,7 +87,7 @@ public class SimulatorJava {
                                 break;
                         }
                     } while (select2 <= 4);
-                    
+
                     break;
 
                 case 2:

@@ -22,22 +22,21 @@ public class ProcessSchedules {
     static int globalTimeRRThroughput = 0;
     static int globalTimeSPN = 0;
     
+    static int globalTimeRR10 = 0;
     //First Come First Serve Function that returns clock time
     public static Queue<ProcessControlBlock> firstcomefirstserve(Queue<ProcessControlBlock> myQueue) {
-    
 
-    //send process queue to calculate throughput method since we've decided that all of our processes will run
-       myQueue = TimeCalculations.calculatethroughput(myQueue); 
-       
-       Queue<ProcessControlBlock> TimeQueue = new LinkedList();
-       
-    //while the queue still contains process objects, run first come first serve schedule algorithm
+        //send process queue to calculate throughput method since we've decided that all of our processes will run
+        myQueue = TimeCalculations.calculatethroughput(myQueue);
+
+        Queue<ProcessControlBlock> TimeQueue = new LinkedList();
+
+        //while the queue still contains process objects, run first come first serve schedule algorithm
         while (!myQueue.isEmpty()) {
-           
 
             //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
-            
+
             temp.setresponsetime(globalTime);
             temp.setwaittime(globalTime);
 
@@ -49,10 +48,9 @@ public class ProcessSchedules {
             if (io > 0) {
                 ioclockTime = IOProcessing.processIO(temp, ioclockTime);
             }
-            
+
             globalTime += ioclockTime;
             globalTime += temp.getcontextswitchtime();
-            
 
             //set the variable burst to the burst time that is within the process object
             int burst = temp.getbursttime();
@@ -62,26 +60,38 @@ public class ProcessSchedules {
                 burst--;
                 globalTime++;
             }
-            
+
             temp.setturnaroundtime(globalTime);
             TimeQueue.add(temp);
             //When the process is done running (burst time = 0), remove it from the queue
-            myQueue.remove(0);
-            
+            // myQueue.remove(0);
+
         }
-        
+
         //String Name = "First Come First Serve";
         //ExcelExport.exceltest(Name, TimeQueue);
         return TimeQueue;
-        
+
     }
 
     //Round Robin Function with time quantum of 1 that returns clock time
-    public static void rr1(Queue<ProcessControlBlock> myQueue) {
+    public static Queue<ProcessControlBlock> rr1(Queue<ProcessControlBlock> myQueue) {
+        //send process queue to calculate throughput method since we've decided that all of our processes will run
+        myQueue = TimeCalculations.calculatethroughput(myQueue);
+
+        Queue<ProcessControlBlock> TimeQueue = new LinkedList();
+
         //while the queue still contains process objects, run round robin schedule algorithm
         while (!myQueue.isEmpty()) {
             //grab first process object off of the queue
             ProcessControlBlock temp = myQueue.poll();
+
+            //only calculates response time when the process is first accepted into the CPU, not when it is in the CPU a second time or third...etc.
+            if (temp.getpid() != 0 && temp.getresponsetime() == 0) {
+                temp.setresponsetime(globalTimeRR);
+            }
+
+            temp.setwaittime(globalTimeRR + temp.getwaittime());
 
             //get the io time for each process
             int io = temp.getiotime();
@@ -92,64 +102,97 @@ public class ProcessSchedules {
                 ioclockTime = IOProcessing.processIO(temp, ioclockTime);
             }
 
+            globalTimeRR += ioclockTime;
+            globalTimeRR += temp.getcontextswitchtime();
+
             //set the variable burst to the burst time that is within the process object
-            int burst = temp.getbursttime();
+            int burst = temp.getbursttimerr();
+
             for (int i = 0; i < 1; i++) {
-                burst--;
-                //rrclockTime++;
-            }
-            //Checks if process is done running (burst time = 0) and if it is, remove the process object from the queue
-            //else if the burst time is not 0, reset the burst time in the process object to the new burst time and add it to the end of the queue
-            if (burst == 0) {
-                myQueue.remove(0);
-            } else {
-                temp.setburst(burst);
-                myQueue.add(temp);
-            }
-        }
-    
-    }
-
-    //Round Robin Function with time quantum of 10 that returns clock time
-    public static void rr10(Queue<ProcessControlBlock> myQueue) {
-        //while the queue still contains process objects, run round robin schedule algorithm
-        while (!myQueue.isEmpty()) {
-            //grab first process object off of the queue
-            ProcessControlBlock temp = myQueue.poll();
-
-            //get the io time for each process
-            int io = temp.getiotime();
-            int ioclockTime = 0;
-
-            //if io time > 0, send to IOProcessing
-            if (io > 0) {
-                ioclockTime = IOProcessing.processIO(temp, ioclockTime);
-            }
-
-            //set the variable burst to the burst time that is within the process object
-            int burst = temp.getbursttime();
-            //run the process for 10 "clock time seconds" for round robin 10
-            for (int i = 0; i < 10; i++) {
                 //if process burst time is 0, get out of the for loop
-                if (burst == 0) {
-                    myQueue.remove(0);
-                    break;
-                } //if the process burst time is not 0, decrease the burst time and increase clock time
-                else {
+                if (burst != 0) {
                     burst--;
-                    //rr10clockTime++;
-                }                
+                    globalTimeRR++;
+
+                    if (burst == 0) {
+                        temp.setturnaroundtime(globalTimeRR);
+                        TimeQueue.add(temp);
+                        break;
+                    }
+                }
             }
             //if the burst time is not 0, set the new burst time for the process and add the process to the end of the queue
             if (burst != 0) {
-                temp.setburst(burst);
+                temp.setburstrr(burst);
+                myQueue.add(temp);
+            }
+
+        }
+        return TimeQueue;
+    }
+
+    //Round Robin Function with time quantum of 10 that returns clock time
+    public static Queue<ProcessControlBlock> rr10(Queue<ProcessControlBlock> myQueue) {
+        //send process queue to calculate throughput method since we've decided that all of our processes will run
+        myQueue = TimeCalculations.calculatethroughput(myQueue);
+
+        Queue<ProcessControlBlock> TimeQueue = new LinkedList();
+
+        //while the queue still contains process objects, run round robin schedule algorithm
+        while (!myQueue.isEmpty()) {
+            //grab first process object off of the queue
+            ProcessControlBlock temp = myQueue.poll();
+
+            //only calculates response time when the process is first accepted into the CPU, not when it is in the CPU a second time or third...etc.
+            if (temp.getpid() != 0 && temp.getresponsetime() == 0) {
+                temp.setresponsetime(globalTimeRR10);
+            }
+
+            temp.setwaittime(globalTimeRR10 + temp.getwaittime());
+
+            //get the io time for each process
+            int io = temp.getiotime();
+            int ioclockTime = 0;
+
+            //if io time > 0, send to IOProcessing
+            if (io > 0) {
+                ioclockTime = IOProcessing.processIO(temp, ioclockTime);
+            }
+
+            globalTimeRR10 += ioclockTime;
+            globalTimeRR10 += temp.getcontextswitchtime();
+
+            //set the variable burst to the burst time that is within the process object
+            int burst = temp.getbursttimerr();
+            //run the process for 10 "clock time seconds" for round robin 10
+            for (int i = 0; i < 10; i++) {
+                //if process burst time is 0, get out of the for loop
+                if (burst != 0) {
+                    burst--;
+                    globalTimeRR10++;
+
+                    if (burst == 0) {
+                        temp.setturnaroundtime(globalTimeRR10);
+                        TimeQueue.add(temp);
+                        break;
+                    }
+
+                } //if the process burst time is not 0, decrease the burst time and increase clock time
+
+            }
+            //if the burst time is not 0, set the new burst time for the process and add the process to the end of the queue
+            if (burst != 0) {
+                temp.setburstrr(burst);
                 myQueue.add(temp);
             }
         }
-        
+        return TimeQueue;
     }
+
     
     public static Queue shortestnext(Queue<ProcessControlBlock> myQueue) {
+
+    
         ArrayList<ProcessControlBlock> spn = new ArrayList<ProcessControlBlock>();
         int counter = myQueue.size();
         
@@ -159,7 +202,7 @@ public class ProcessSchedules {
 
         // empties queue into array 
         while (!myQueue.isEmpty()) {
-            
+
             for (int i = 0; i < counter; i++) {
                 ProcessControlBlock temp = myQueue.remove();
                 spn.add(temp);
@@ -168,14 +211,14 @@ public class ProcessSchedules {
 
         //sort through array and find process with shortest burst time
         while (!spn.isEmpty()) {
-            
+
             ProcessControlBlock tempshortest = spn.get(0);
-            
+
             for (int i = 1; i < spn.size(); i++) {
-                
+
                 if (spn.get(i).getbursttime() < tempshortest.getbursttime()) {
                     tempshortest = spn.get(i);
-                    
+
                 }
             }
             
@@ -212,5 +255,5 @@ public class ProcessSchedules {
         
         return TimeQueueSPN;
     }
-    
+
 }
