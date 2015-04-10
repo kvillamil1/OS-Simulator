@@ -31,26 +31,55 @@ public class SimulatorJava {
         //readFile.randomList(); !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         readFile.load();
         //User Input Options
-        
-        int select;
-        do {
-            select = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:\n1. Uniprocessor\n2. Multiprocessor\n3. Export to Excel Test\n4. Exit"));
 
-            switch (select) {
+        int select1;
+        int select2;
+        do {
+            select1 = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:"
+                    + "\n1. Uniprocessor\n2. Multiprocessor\n3. Export to Excel Test\n4. Exit"));
+
+            switch (select1) {
                 case 1:
-                    
                     System.out.println("Uniprocessor");
                     System.out.println("-------------------");
-                    readFile.setPCB();
-                    Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(readFile.theTable);
-                    String Name = "First Come First Serve";
-                    ExcelExport.exceltest(Name, TimeQueue);
-                    readFile.setPCB();
-                    ProcessSchedules.rr1(readFile.theTable);
-                    readFile.setPCB();
-                    ProcessSchedules.rr10(readFile.theTable);
-                    readFile.setPCB();
-                    //ProcessSchedules.shortestnext(readFile.theTable);
+                    do {
+                        select2 = Integer.parseInt(JOptionPane.showInputDialog("Select An Option:"
+                                + "\n1. FCFS\n2. RR1\n3. RR10"
+                                + "\n4. SPN\n5. Return to Menu"));
+                        switch (select2) {
+                            case 1:
+                                //readFile.setPCB();
+                                //Queue<ProcessControlBlock> TimeQueue = ProcessSchedules.firstcomefirstserve(readFile.theTable);
+                                //String Name = "First Come First Serve";
+                                //ExcelExport.exceltest(Name, TimeQueue);
+                                System.out.println("FCFS");
+                                break;
+
+                            case 2:
+                                //readFile.setPCB();
+                                //ProcessSchedules.rr1(readFile.theTable);
+                                System.out.println("RR1");
+                                break;
+
+                            case 3:
+                                //readFile.setPCB();
+                                //ProcessSchedules.rr10(readFile.theTable);
+                                System.out.println("RR10");
+                                break;
+
+                            case 4:
+                                //readFile.setPCB();
+                                //Queue<ProcessControlBlock> TimeQueueSPN = ProcessSchedules.shortestnext(readFile.theTable);
+                                //String NameSPN = "SPN";
+                                //ExcelExport.exceltest(NameSPN, TimeQueueSPN);
+                                System.out.println("SPN");
+                                break;
+
+                            case 5:
+                                break;
+                        }
+                    } while (select2 <= 4);
+                    
                     break;
 
                 case 2:
@@ -67,8 +96,8 @@ public class SimulatorJava {
                 case 3:
                     //ExcelExport.exceltest();
                     break;
-              
+
             }
-        } while (select <= 2);
+        } while (select1 <= 2);
     }
 }
