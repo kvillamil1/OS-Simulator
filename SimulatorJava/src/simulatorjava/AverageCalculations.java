@@ -55,6 +55,15 @@ public class AverageCalculations {
                 + round.format(averageResponse) + "\nAverage Wait: " 
                 + round.format(averageWait), "CPU", JOptionPane.INFORMATION_MESSAGE);
         
+        //Calculate averages (TESTING PURPOSES)
+//        averageTurn = (sumT/numT);
+//        averageResponse = (sumR/numR);
+//        averageWait = (sumW/numW);
+//        System.out.println("Average Turnaround: " + averageTurn);
+//        System.out.println("Average Response: " + averageResponse);
+//        System.out.println("Average Wait: " + averageWait + "\n");
+          
+        
         return newTimeQueue;
     }
     
